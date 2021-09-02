@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
+---
+layout: default
+---
 
-You can use the [editor on GitHub](https://github.com/hsromulo/estudoenxuto/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+{% for post in paginator.posts %}
+<article class="main-article">
+  <div class="wrap-content">
+    <header class="header-article">
+      <h2 class="title-article"><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h2>
+      <div class="post-date"><span>{{post.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    </header>
+    {% if post.img %}
+       <img class="post-image" src={{ "/assets/img/" | prepend: site.baseurl | append: post.img }} alt="{{post.title}}">
+    {% endif %}
+    <p>{{post.description}} <a class="more" href="{{post.url | prepend: site.baseurl}}">(Read more...)</a></p>
+  </div>
+</article>
+{% endfor %}
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hsromulo/estudoenxuto/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a>
+  {% else %}
+    <span class="previous"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</span>
+  {% endif %}
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+  {% else %}
+    <span class="next ">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+  {% endif %}
+</div>
